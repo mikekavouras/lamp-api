@@ -1,0 +1,52 @@
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/coverage/
+/spec/tmp/*
+/public/assets
+
+# Ignore logs and temp files
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore databases
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore uploads
+/public/system/*
+
+# Ignore other junk that some crops up
+**.orig
+rerun.txt
+pickle-email-*.html
+
+# Ignore temp stuff
+designs
+samples
+TODO.md
+
+# Vagrant
+.vagrant
+
+# Ignore config (optional)
+config/application.yml
+
+# You may want to ignore .env if you are using DotEnv
+# If you do ignore, you should have a .env.example
+.env
+
+# In modern Rails you do not ignore database.yml 
+# or secrets.yml by default. But if you store secrets in them
+# you must not check them in to the repository
+# config/database.yml
+# config/secrets.yml
