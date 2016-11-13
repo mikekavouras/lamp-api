@@ -5,5 +5,7 @@ class PagesController < ApplicationController
 
   def purple
     GlowWorker.perform_async(Device.first.id, 'purple')
+
+    render text: "glow"
   end
 end
