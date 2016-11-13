@@ -34,6 +34,9 @@ gem 'uikit', git: 'https://github.com/jeffrafter/uikit'
 gem 'strapless'
 gem 'awesome_print'
 
+# For particle
+gem 'particlerb'
+
 group :development, :test do
   # Keeping the database fields in the models and specs makes things easier
   gem 'annotate'
