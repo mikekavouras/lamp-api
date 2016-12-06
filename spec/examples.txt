@@ -1,3 +1,23 @@
-example_id                                         | status | run_time        |
--------------------------------------------------- | ------ | --------------- |
-./spec/controllers/pages_controller_spec.rb[1:1:1] | passed | 0.03994 seconds |
+example_id                                           | status  | run_time        |
+---------------------------------------------------- | ------- | --------------- |
+./spec/controllers/oauth_controller_spec.rb[1:1:1]   | passed  | 0.00331 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:1:2:1] | passed  | 0.04386 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:1:2:2] | passed  | 0.01806 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:1:2:3] | passed  | 0.01595 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:2:1]   | passed  | 0.0169 seconds  |
+./spec/controllers/oauth_controller_spec.rb[1:2:2]   | passed  | 0.0245 seconds  |
+./spec/controllers/oauth_controller_spec.rb[1:2:3:1] | passed  | 0.04774 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:3:1]   | passed  | 0.01946 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:3:2]   | passed  | 0.01202 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:3:3:1] | passed  | 0.04233 seconds |
+./spec/controllers/oauth_controller_spec.rb[1:3:3:2] | passed  | 0.03158 seconds |
+./spec/controllers/pages_controller_spec.rb[1:1:1]   | passed  | 0.02196 seconds |
+./spec/models/oauth_access_token_spec.rb[1:1]        | passed  | 0.00329 seconds |
+./spec/models/oauth_access_token_spec.rb[1:2]        | passed  | 0.01908 seconds |
+./spec/models/oauth_access_token_spec.rb[1:3]        | passed  | 0.05882 seconds |
+./spec/models/oauth_access_token_spec.rb[1:4]        | passed  | 0.01006 seconds |
+./spec/models/oauth_access_token_spec.rb[1:5]        | passed  | 0.06524 seconds |
+./spec/models/oauth_application_spec.rb[1:1]         | passed  | 0.00365 seconds |
+./spec/models/oauth_application_spec.rb[1:2]         | passed  | 0.01913 seconds |
+./spec/models/oauth_application_spec.rb[1:3]         | passed  | 0.00779 seconds |
+./spec/models/user_spec.rb[1:1]                      | pending | 0.00002 seconds |

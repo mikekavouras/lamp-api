@@ -53,7 +53,7 @@ end
 group :test, :development do
   # Get specs involved in this process
   gem 'rspec-rails', '>= 3.5.0'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   gem 'factory_girl_rails'
 end
 

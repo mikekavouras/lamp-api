@@ -10,4 +10,8 @@ Rails.application.routes.draw do
 
   get '/ping', to: 'pages#ping'
   get '/purple', to: 'pages#purple'
+
+  post '/oauth', to: 'oauth#create'
+  post '/oauth/token', to: 'oauth#refresh'
+  post '/oauth/revoke', to: 'oauth#revoke'
 end
