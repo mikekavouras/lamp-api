@@ -1,11 +1,11 @@
 class PagesController < ApplicationController
   def ping
-    render text: "pong"
+    render plain: "pong"
   end
 
   def purple
     GlowWorker.perform_async(Device.first.id, 'purple')
 
-    render text: "glow"
+    render plain: "glow"
   end
 end

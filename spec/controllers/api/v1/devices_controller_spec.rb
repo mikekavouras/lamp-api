@@ -1,7 +1,53 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::OauthController, type: :controller do
+RSpec.describe Api::V1::DevicesController, type: :controller do
+  let(:user) { create(:user, anonymous: true) }
+  let(:device) { create(:device) }
+  let!(:user_device) { create(:user_device, user: user, device: device) }
 
-  it "gets a device" do
+  context "with a current user" do
+    before(:each) do
+      expect(controller).to receive(:require_oauth_application).and_return(true)
+      expect(controller).to receive(:require_oauth_access_token).and_return(true)
+      allow(controller).to receive(:current_user).and_return(user)
+    end
+
+    describe "POST #create" do
+      it "creates a user device" do
+        post :create
+        puts response.body
+        json = JSON.parse(response.body).with_indifferent_access
+        expect(json[:data][0][:id]).to be_present
+        expect(response).to be_ok
+      end
+
+      it "returns an error if it is invalid"
+    end
+
+    describe "GET #index" do
+      it "gets a list of devices" do
+        get :index
+        json = JSON.parse(response.body).with_indifferent_access
+        expect(json[:data][0][:id]).to eq("#{user_device.id}")
+        expect(response).to be_ok
+      end
+    end
+
+    describe "GET #show" do
+      it "gets a device" do
+        get :show, params: { id: user_device.id }
+        json = JSON.parse(response.body).with_indifferent_access
+        expect(json[:data][:id]).to eq("#{user_device.id}")
+        expect(json[:data][:attributes][:name]).to eq(user_device.name)
+        expect(json[:data][:attributes][:device][:particle_id]).to eq(device.particle_id)
+        expect(response).to be_ok
+      end
+
+      it "returns an error when there is no device" do
+        get :show, params: { id: -1 }
+        expect(response.body).to eq("{\"error\":\"device_not_found\"}")
+      end
+    end
   end
+
 end
