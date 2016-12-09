@@ -34,6 +34,9 @@ gem 'uikit', git: 'https://github.com/jeffrafter/uikit'
 gem 'strapless'
 gem 'awesome_print'
 
+# For tokens
+gem 'hashids'
+
 # For particle
 gem 'particlerb'
 

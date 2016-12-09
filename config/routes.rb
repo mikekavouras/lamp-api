@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   post '/oauth', to: 'oauth#create'
   post '/oauth/token', to: 'oauth#refresh'
   post '/oauth/revoke', to: 'oauth#revoke'
+
+
 end

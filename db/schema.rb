@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206223946) do
+ActiveRecord::Schema.define(version: 20161208144232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "apns_tokens", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "active"
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_apns_tokens_on_active", using: :btree
+    t.index ["created_at"], name: "index_apns_tokens_on_created_at", using: :btree
+    t.index ["updated_at"], name: "index_apns_tokens_on_updated_at", using: :btree
+    t.index ["user_id"], name: "index_apns_tokens_on_user_id", using: :btree
+  end
 
   create_table "devices", force: :cascade do |t|
     t.string   "particle_id"
@@ -23,6 +35,27 @@ ActiveRecord::Schema.define(version: 20161206223946) do
     t.index ["created_at"], name: "index_devices_on_created_at", using: :btree
     t.index ["particle_id"], name: "index_devices_on_particle_id", unique: true, using: :btree
     t.index ["updated_at"], name: "index_devices_on_updated_at", using: :btree
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.integer  "checkout_id"
+    t.integer  "user_id"
+    t.integer  "device_id"
+    t.integer  "usage_count", default: 0
+    t.integer  "usage_limit"
+    t.datetime "expires_at"
+    t.datetime "revoked_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["checkout_id"], name: "index_invites_on_checkout_id", using: :btree
+    t.index ["created_at"], name: "index_invites_on_created_at", using: :btree
+    t.index ["device_id"], name: "index_invites_on_device_id", using: :btree
+    t.index ["expires_at"], name: "index_invites_on_expires_at", using: :btree
+    t.index ["revoked_at"], name: "index_invites_on_revoked_at", using: :btree
+    t.index ["updated_at"], name: "index_invites_on_updated_at", using: :btree
+    t.index ["usage_count"], name: "index_invites_on_usage_count", using: :btree
+    t.index ["usage_limit"], name: "index_invites_on_usage_limit", using: :btree
+    t.index ["user_id"], name: "index_invites_on_user_id", using: :btree
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -51,6 +84,51 @@ ActiveRecord::Schema.define(version: 20161206223946) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "filename"
+    t.string   "ext"
+    t.string   "mime_type"
+    t.integer  "original_height"
+    t.integer  "original_width"
+    t.string   "sha"
+    t.string   "ip_address"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "device_id"
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "red",         default: 0
+    t.integer  "green",       default: 0
+    t.integer  "blue",        default: 0
+    t.string   "pattern"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["created_at"], name: "index_relationships_on_created_at", using: :btree
+    t.index ["device_id"], name: "index_relationships_on_device_id", using: :btree
+    t.index ["photo_id"], name: "index_relationships_on_photo_id", using: :btree
+    t.index ["updated_at"], name: "index_relationships_on_updated_at", using: :btree
+    t.index ["user_id"], name: "index_relationships_on_user_id", using: :btree
+  end
+
+  create_table "user_devices", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "device_id"
+    t.integer  "invite_id"
+    t.boolean  "direct",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["created_at"], name: "index_user_devices_on_created_at", using: :btree
+    t.index ["updated_at"], name: "index_user_devices_on_updated_at", using: :btree
+    t.index ["user_id", "device_id"], name: "index_user_devices_on_user_id_and_device_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

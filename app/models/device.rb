@@ -1,6 +1,9 @@
 class Device < ApplicationRecord
   COLORS = ['red', 'blue', 'purple'].freeze
 
+  has_many :user_devices
+  has_many :users, through: :user_devices
+
   validates :particle_id, presence: true, uniqueness: true
 
   def glow(color)
@@ -18,5 +21,15 @@ class Device < ApplicationRecord
   def import(particle_device)
     self.params = particle_device.attributes.to_json
     self.save
+  end
+
+  def name
+    parsed_params[:name]
+  end
+
+  private
+
+  def parsed_params
+    @parsed_params ||= JSON.parse(params).with_indifferent_access rescue {}
   end
 end
