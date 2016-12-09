@@ -11,17 +11,16 @@ Rails.application.routes.draw do
   get '/ping', to: 'pages#ping'
   get '/purple', to: 'pages#purple'
 
-  post '/oauth', to: 'oauth#create'
-  post '/oauth/token', to: 'oauth#refresh'
-  post '/oauth/revoke', to: 'oauth#revoke'
-
-  scope path: '/ap1', module: 'api' do
+  scope path: '/api', module: 'api' do
     scope path: '/v1', module: 'v1' do
+      post '/oauth', to: 'oauth#create'
+      post '/oauth/token', to: 'oauth#refresh'
+      post '/oauth/revoke', to: 'oauth#revoke'
       get '/devices', to: 'devices#index'
       get '/devices/:id', to: 'devices#show'
       post '/devices', to: 'devices#create'
-      delete '/devices', to: 'devices#destroy'
-      post '/devices/reset', to: 'devices#reset'
+      delete '/devices/:id', to: 'devices#destroy'
+      post '/devices/:id/reset', to: 'devices#reset'
     end
   end
 end

@@ -124,9 +124,11 @@ ActiveRecord::Schema.define(version: 20161208144232) do
     t.integer  "device_id"
     t.integer  "invite_id"
     t.boolean  "direct",     default: false
+    t.string   "name"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["created_at"], name: "index_user_devices_on_created_at", using: :btree
+    t.index ["name"], name: "index_user_devices_on_name", using: :btree
     t.index ["updated_at"], name: "index_user_devices_on_updated_at", using: :btree
     t.index ["user_id", "device_id"], name: "index_user_devices_on_user_id_and_device_id", using: :btree
   end

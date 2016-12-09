@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OauthController, type: :controller do
+RSpec.describe Api::V1::OauthController, type: :controller do
   let(:user) { create(:user, anonymous: true) }
   let(:oauth_application) { create(:oauth_application) }
   let(:oauth_access_token) { create(:oauth_access_token, oauth_application: oauth_application, resource_owner: user) }
