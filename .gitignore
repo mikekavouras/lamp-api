@@ -34,6 +34,7 @@ pickle-email-*.html
 designs
 samples
 TODO.md
+spec/examples.txt
 
 # Vagrant
 .vagrant
@@ -45,7 +46,7 @@ config/application.yml
 # If you do ignore, you should have a .env.example
 .env
 
-# In modern Rails you do not ignore database.yml 
+# In modern Rails you do not ignore database.yml
 # or secrets.yml by default. But if you store secrets in them
 # you must not check them in to the repository
 # config/database.yml

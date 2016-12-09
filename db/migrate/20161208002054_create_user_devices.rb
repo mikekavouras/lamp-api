@@ -5,6 +5,7 @@ class CreateUserDevices < ActiveRecord::Migration[5.0]
       t.integer :device_id
       t.integer :invite_id
       t.boolean :direct, default: false
+      t.string :name, index: true
 
       t.timestamps null: false, index: true
     end
