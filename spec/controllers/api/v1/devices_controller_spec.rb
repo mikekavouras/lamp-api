@@ -14,14 +14,20 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
 
     describe "POST #create" do
       it "creates a user device" do
-        post :create
-        puts response.body
+        name = "Your Mom's Lamp"
+        post :create, params: { particle_id: device.particle_id, name: name }
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][0][:id]).to be_present
+        expect(json[:data][:id]).to be_present
+        expect(json[:data][:attributes][:name]).to eq(name)
         expect(response).to be_ok
       end
 
-      it "returns an error if it is invalid"
+      it "returns an error if it is invalid" do
+        post :create, params: { particle_id: device.particle_id, name: nil }
+        json = JSON.parse(response.body).with_indifferent_access
+        expect(json[:error]).to eq("invalid_device")
+        expect(response.code).to eq("422")
+      end
     end
 
     describe "GET #index" do
@@ -46,6 +52,26 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
       it "returns an error when there is no device" do
         get :show, params: { id: -1 }
         expect(response.body).to eq("{\"error\":\"device_not_found\"}")
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "deletes a device" do
+        expect {
+          delete :destroy, params: { id: user_device.id }
+        }.to change(UserDevice, :count).by(-1)
+
+        expect(response).to be_ok
+      end
+    end
+
+    describe "POST #reset" do
+      it "deletes all devices" do
+        expect {
+          post :reset, params: { id: user_device.id }
+        }.to change(UserDevice, :count).by(-1)
+
+        expect(response).to be_ok
       end
     end
   end

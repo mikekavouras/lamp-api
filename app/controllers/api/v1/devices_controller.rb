@@ -2,12 +2,17 @@ module Api
   module V1
     class DevicesController < ApiController
       before_action :require_device, only: [:create]
+      before_action :require_user_device_id, only: [:show, :delete, :reset]
       before_action :require_user_device, only: [:show, :delete, :reset]
 
       def create
-        @user_device = current_user.user_devices.create(device: device, name: params[:name], direct: true)
+        @user_device = current_user.user_devices.new(device: device, name: params[:name], direct: true)
 
-        render json: user_device
+        if user_device.save
+          render json: user_device
+        else
+          render json: { error: "invalid_device", errors: user_device.errors }, status: :unprocessable_entity
+        end
       end
 
       def index
@@ -18,10 +23,16 @@ module Api
         render json: user_device
       end
 
-      def delete
+      def destroy
+        user_device.destroy
+
+        head :ok
       end
 
       def reset
+        user_device.device.user_devices.destroy_all
+
+        head :ok
       end
 
       private
@@ -39,19 +50,23 @@ module Api
       end
 
       def user_device
-        @user_device ||= current_user.user_devices.includes(:device).where(id: user_device_id).first if user_device_id.present?
+        @user_device ||= current_user.user_devices.includes(:device).where(id: user_device_id).first
       end
 
       def user_devices
-        @user_device ||= current_user.user_devices.includes(:device).all
+        @user_devices ||= current_user.user_devices.includes(:device).all
       end
 
       def require_device
-        render json: { error: "device_not_found" }, status: 404 unless device
+        render json: { error: "particle_device_not_found" }, status: 404 unless device.present?
+      end
+
+      def require_user_device_id
+        render json: { error: "no_device_id" }, status: 404 unless user_device_id.present?
       end
 
       def require_user_device
-        render json: { error: "device_not_found" }, status: 404 unless user_device
+        render json: { error: "device_not_found" }, status: 404 unless user_device.present?
       end
     end
   end
