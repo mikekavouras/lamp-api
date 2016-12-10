@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Relationship, type: :model do
+RSpec.describe Interaction, type: :model do
   it { should belong_to(:user) }
   it { should belong_to(:device) }
   it { should belong_to(:photo) }

@@ -37,6 +37,25 @@ ActiveRecord::Schema.define(version: 20161208144232) do
     t.index ["updated_at"], name: "index_devices_on_updated_at", using: :btree
   end
 
+  create_table "interactions", force: :cascade do |t|
+    t.integer  "device_id"
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "red",         default: 0
+    t.integer  "green",       default: 0
+    t.integer  "blue",        default: 0
+    t.string   "pattern"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["created_at"], name: "index_interactions_on_created_at", using: :btree
+    t.index ["device_id"], name: "index_interactions_on_device_id", using: :btree
+    t.index ["photo_id"], name: "index_interactions_on_photo_id", using: :btree
+    t.index ["updated_at"], name: "index_interactions_on_updated_at", using: :btree
+    t.index ["user_id"], name: "index_interactions_on_user_id", using: :btree
+  end
+
   create_table "invites", force: :cascade do |t|
     t.integer  "checkout_id"
     t.integer  "user_id"
@@ -98,25 +117,6 @@ ActiveRecord::Schema.define(version: 20161208144232) do
     t.string   "ip_address"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-  end
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer  "device_id"
-    t.integer  "user_id"
-    t.integer  "photo_id"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "red",         default: 0
-    t.integer  "green",       default: 0
-    t.integer  "blue",        default: 0
-    t.string   "pattern"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.index ["created_at"], name: "index_relationships_on_created_at", using: :btree
-    t.index ["device_id"], name: "index_relationships_on_device_id", using: :btree
-    t.index ["photo_id"], name: "index_relationships_on_photo_id", using: :btree
-    t.index ["updated_at"], name: "index_relationships_on_updated_at", using: :btree
-    t.index ["user_id"], name: "index_relationships_on_user_id", using: :btree
   end
 
   create_table "user_devices", force: :cascade do |t|

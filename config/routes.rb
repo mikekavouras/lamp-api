@@ -13,14 +13,17 @@ Rails.application.routes.draw do
 
   scope path: '/api', module: 'api' do
     scope path: '/v1', module: 'v1' do
+
       post '/oauth', to: 'oauth#create'
       post '/oauth/token', to: 'oauth#refresh'
       post '/oauth/revoke', to: 'oauth#revoke'
+
       get '/devices', to: 'devices#index'
       get '/devices/:id', to: 'devices#show'
       post '/devices', to: 'devices#create'
       delete '/devices/:id', to: 'devices#destroy'
       post '/devices/:id/reset', to: 'devices#reset'
+
     end
   end
 end
