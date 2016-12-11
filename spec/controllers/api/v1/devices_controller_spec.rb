@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Api::V1::DevicesController, type: :controller do
   let(:user) { create(:user, anonymous: true) }
   let(:device) { create(:device) }
-  let!(:user_device) { create(:user_device, user: user, device: device) }
 
   context "with a current user" do
     before(:each) do
@@ -22,6 +21,14 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
         expect(response).to be_ok
       end
 
+      it "returns an existing user device if one already exists" do
+        user_device =create(:user_device, user: user, device: device)
+        name = "Your Mom's Lamp"
+        post :create, params: { particle_id: device.particle_id, name: name }
+        json = JSON.parse(response.body).with_indifferent_access
+        expect(json[:data][:id]).to eq("#{user_device.id}")
+       end
+
       it "returns an error if it is invalid" do
         post :create, params: { particle_id: device.particle_id, name: nil }
         json = JSON.parse(response.body).with_indifferent_access
@@ -30,50 +37,56 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
       end
     end
 
-    describe "GET #index" do
-      it "gets a list of devices" do
-        get :index
-        json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][0][:id]).to eq("#{user_device.id}")
-        expect(response).to be_ok
-      end
-    end
+    context "with an existing user_device" do
+      let!(:user_device) { create(:user_device, user: user, device: device) }
 
-    describe "GET #show" do
-      it "gets a device" do
-        get :show, params: { id: user_device.id }
-        json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:id]).to eq("#{user_device.id}")
-        expect(json[:data][:attributes][:name]).to eq(user_device.name)
-        expect(json[:data][:attributes][:device][:particle_id]).to eq(device.particle_id)
-        expect(response).to be_ok
+      describe "GET #index" do
+        it "gets a list of devices" do
+          user_device
+          get :index
+          json = JSON.parse(response.body).with_indifferent_access
+          expect(json[:data][0][:id]).to eq("#{user_device.id}")
+          expect(response).to be_ok
+        end
       end
 
-      it "returns an error when there is no device" do
-        get :show, params: { id: -1 }
-        expect(response.body).to eq("{\"error\":\"device_not_found\"}")
+      describe "GET #show" do
+        it "gets a device" do
+          get :show, params: { id: user_device.id }
+          json = JSON.parse(response.body).with_indifferent_access
+          expect(json[:data][:id]).to eq("#{user_device.id}")
+          expect(json[:data][:attributes][:name]).to eq(user_device.name)
+          expect(json[:data][:attributes][:device][:particle_id]).to eq(device.particle_id)
+          expect(response).to be_ok
+        end
+
+        it "returns an error when there is no device" do
+          get :show, params: { id: -1 }
+          expect(response.body).to eq("{\"error\":\"device_not_found\"}")
+        end
       end
-    end
 
-    describe "DELETE #destroy" do
-      it "deletes a device" do
-        expect {
-          delete :destroy, params: { id: user_device.id }
-        }.to change(UserDevice, :count).by(-1)
+      describe "DELETE #destroy" do
+        it "deletes a device" do
+          expect {
+            delete :destroy, params: { id: user_device.id }
+          }.to change(UserDevice, :count).by(-1)
 
-        expect(response).to be_ok
+          expect(response).to be_ok
+        end
       end
-    end
 
-    describe "POST #reset" do
-      it "deletes all devices" do
-        expect {
-          post :reset, params: { id: user_device.id }
-        }.to change(UserDevice, :count).by(-1)
+      describe "POST #reset" do
+        it "deletes all devices" do
+          expect {
+            post :reset, params: { id: user_device.id }
+          }.to change(UserDevice, :count).by(-1)
 
-        expect(response).to be_ok
+          expect(response).to be_ok
+        end
+
+        it "revokes all invites for the device"
       end
     end
   end
-
 end

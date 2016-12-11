@@ -6,7 +6,11 @@ module Api
       before_action :require_user_device, only: [:show, :delete, :reset]
 
       def create
-        @user_device = current_user.user_devices.new(device: device, name: params[:name], direct: true)
+        # TODO is this the right behavior to overwrite the name and direct?
+        @user_device = current_user.user_devices.where(device: device).first
+        @user_device ||= current_user.user_devices.new(device: device)
+        @user_device.name = params[:name]
+        @user_device.direct = true
 
         if user_device.save
           render json: user_device

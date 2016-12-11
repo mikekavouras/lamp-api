@@ -1,13 +1,10 @@
 FactoryGirl.define do
   factory :interaction do
-    device_id 1
-    user_id 1
-    photo_id 1
-    name "MyString"
-    description "MyText"
-    red 1
-    green 1
-    blue 1
-    pattern "MyString"
+    name "Spooky"
+    description "Spooky loves purple"
+    red 100
+    green 0
+    blue 100
+    pattern "blink"
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208144232) do
+ActiveRecord::Schema.define(version: 20161211101750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,21 @@ ActiveRecord::Schema.define(version: 20161208144232) do
     t.index ["created_at"], name: "index_devices_on_created_at", using: :btree
     t.index ["particle_id"], name: "index_devices_on_particle_id", unique: true, using: :btree
     t.index ["updated_at"], name: "index_devices_on_updated_at", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "interaction_id"
+    t.text     "response"
+    t.text     "error"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["created_at"], name: "index_events_on_created_at", using: :btree
+    t.index ["interaction_id"], name: "index_events_on_interaction_id", using: :btree
+    t.index ["status"], name: "index_events_on_status", using: :btree
+    t.index ["updated_at"], name: "index_events_on_updated_at", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "interactions", force: :cascade do |t|

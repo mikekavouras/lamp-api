@@ -31,10 +31,11 @@ RSpec.describe Api::V1::OauthController, type: :controller do
       it "returns an access token" do
         post :create
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:access_token]).to be_present
-        expect(json[:refresh_token]).to be_present
-        expect(json[:token_type]).to eq('bearer')
-        expect(json[:expires_in] > 83000).to be
+        attributes = json[:data][:attributes]
+        expect(attributes[:access_token]).to be_present
+        expect(attributes[:refresh_token]).to be_present
+        expect(attributes[:token_type]).to eq('bearer')
+        expect(attributes[:expires_in] > 83000).to be
       end
     end
   end
