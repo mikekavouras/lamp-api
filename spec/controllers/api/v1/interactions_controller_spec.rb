@@ -6,7 +6,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
   let(:user_device) { create(:user_device, user: user, device: device) }
   let(:interaction) { create(:interaction, user: user, user_device: user_device) }
   let(:valid_params) {{
-    id: user_device.id,
+    user_device_id: user_device.id,
     name: "Cute",
     description: "I glow this to say sup",
     red: 100,
@@ -38,7 +38,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
       end
 
       it "doesn't create an interaction if there is no device" do
-        valid_params.delete(:id)
+        valid_params.delete(:user_device_id)
         post :create, params: valid_params
         expect(response.body).to eq('{"error":"no_device_id"}')
       end

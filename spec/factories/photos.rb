@@ -1,13 +1,11 @@
 FactoryGirl.define do
   factory :photo do
-    user_id 1
-    token "MyString"
-    filename "MyString"
-    ext "MyString"
-    mime_type "MyString"
-    original_height 1
-    original_width 1
-    sha "MyString"
-    ip_address "MyString"
+    filename 'iguana.jpg'
+    ext '.jpg'
+    original_width 640
+    original_height 783
+    sha 'e360eb2880f83e6c0fb036d206121adb8ae25f0c'
+    mime_type 'image/jpeg'
+    ip_address "1.2.3.4"
   end
 end

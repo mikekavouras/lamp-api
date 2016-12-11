@@ -8,6 +8,7 @@ module Api
 
       def create
         @interaction = current_user.interactions.new(interaction_params)
+        @interaction.photo = photo
         @interaction.user_device = user_device
 
         if interaction.save
@@ -26,6 +27,9 @@ module Api
       end
 
       def update
+        interaction.photo = photo
+        interaction.user_device = user_device
+
         if interaction.update_attributes(interaction_params)
           render json: interaction
         else
@@ -72,8 +76,16 @@ module Api
         @interactions ||= current_user.interactions.all
       end
 
+      def photo_id
+        "#{params[:photo_id]}"
+      end
+
+      def photo
+        @photo ||= current_user.photos.where(id: photo_id).first
+      end
+
       def user_device_id
-        "#{params[:id]}"
+        "#{params[:user_device_id]}"
       end
 
       def user_device

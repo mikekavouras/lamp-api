@@ -24,15 +24,19 @@ Rails.application.routes.draw do
       delete '/devices/:id', to: 'devices#destroy'
       post '/devices/:id/reset', to: 'devices#reset'
 
+      post '/invites', to: 'invites#create'
+      post '/invites/accept', to: 'invites#accept'
+
+      get '/photos', to: 'photos#index'
+      post '/photos', to: 'photos#create'
+      patch '/photos', to: 'photos#update'
+
       post '/interactions', to: 'interactions#create'
       get '/interactions', to: 'interactions#index'
       get '/interactions/:id', to: 'interactions#show'
       patch '/interactions/:id', to: 'interactions#update'
       delete '/interactions/:id', to: 'interactions#destroy'
       post '/interactions/:id', to: 'interactions#event'
-
-      post '/invites', to: 'invites#create'
-      post '/invites/accept', to: 'invites#accept'
 
       get '/events', to: 'events#index'
     end
