@@ -1,8 +1,8 @@
 class CreateInteractions < ActiveRecord::Migration[5.0]
   def change
     create_table :interactions do |t|
-      t.integer :device_id, index: true
       t.integer :user_id, index: true
+      t.integer :user_device_id, index: true
       t.integer :photo_id, index: true
       t.string :name
       t.text :description

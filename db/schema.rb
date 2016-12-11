@@ -53,21 +53,21 @@ ActiveRecord::Schema.define(version: 20161211101750) do
   end
 
   create_table "interactions", force: :cascade do |t|
-    t.integer  "device_id"
     t.integer  "user_id"
+    t.integer  "user_device_id"
     t.integer  "photo_id"
     t.string   "name"
     t.text     "description"
-    t.integer  "red",         default: 0
-    t.integer  "green",       default: 0
-    t.integer  "blue",        default: 0
+    t.integer  "red",            default: 0
+    t.integer  "green",          default: 0
+    t.integer  "blue",           default: 0
     t.string   "pattern"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["created_at"], name: "index_interactions_on_created_at", using: :btree
-    t.index ["device_id"], name: "index_interactions_on_device_id", using: :btree
     t.index ["photo_id"], name: "index_interactions_on_photo_id", using: :btree
     t.index ["updated_at"], name: "index_interactions_on_updated_at", using: :btree
+    t.index ["user_device_id"], name: "index_interactions_on_user_device_id", using: :btree
     t.index ["user_id"], name: "index_interactions_on_user_id", using: :btree
   end
 

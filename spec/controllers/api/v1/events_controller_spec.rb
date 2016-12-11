@@ -4,7 +4,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
   let(:user) { create(:user, anonymous: true) }
   let(:device) { create(:device) }
   let(:user_device) { create(:user_device, user: user, device: device) }
-  let(:interaction) { create(:interaction, user: user, device: device) }
+  let(:interaction) { create(:interaction, user: user, user_device: user_device) }
   let(:event) { create(:event, user: user, interaction: interaction) }
 
   context "with a current user" do

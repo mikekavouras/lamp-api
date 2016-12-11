@@ -8,7 +8,7 @@ module Api
 
       def create
         @interaction = current_user.interactions.new(interaction_params)
-        @interaction.device = user_device.device
+        @interaction.user_device = user_device
 
         if interaction.save
           render json: interaction

@@ -4,7 +4,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
   let(:user) { create(:user, anonymous: true) }
   let(:device) { create(:device) }
   let(:user_device) { create(:user_device, user: user, device: device) }
-  let(:interaction) { create(:interaction, user: user, device: device) }
+  let(:interaction) { create(:interaction, user: user, user_device: user_device) }
   let(:valid_params) {{
     id: user_device.id,
     name: "Cute",

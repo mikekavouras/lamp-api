@@ -6,7 +6,7 @@ module Api
         :description,
         :photo,
         :user,
-        :device,
+        :user_device,
         :red,
         :green,
         :blue,
