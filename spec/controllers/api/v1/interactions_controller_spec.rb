@@ -80,5 +80,16 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
         expect(response).to be_ok
       end
     end
+
+    describe "POST #event" do
+      it "creates an event for an interaction" do
+        interaction
+        expect {
+          post :event, params: { id: interaction.id }
+        }.to change(Event, :count).by(1)
+
+        expect(response).to be_ok
+      end
+    end
   end
 end

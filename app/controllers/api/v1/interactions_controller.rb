@@ -3,8 +3,8 @@ module Api
     class InteractionsController < ApiController
       before_action :require_user_device_id, only: [:create]
       before_action :require_user_device, only: [:create]
-      before_action :require_interaction_id, only: [:show, :update, :destroy]
-      before_action :require_interaction, only: [:show, :update, :destroy]
+      before_action :require_interaction_id, only: [:show, :update, :destroy, :event]
+      before_action :require_interaction, only: [:show, :update, :destroy, :event]
 
       def create
         @interaction = current_user.interactions.new(interaction_params)
@@ -37,6 +37,14 @@ module Api
         interaction.destroy
 
         head :ok
+      end
+
+      def event
+        @event = interaction.events.create(user: current_user)
+
+        EventWorker.perform_async(@event.id)
+
+        render json: @event
       end
 
       private
