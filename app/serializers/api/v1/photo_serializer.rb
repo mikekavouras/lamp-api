@@ -8,6 +8,7 @@ module Api
         :original_width,
         :original_height,
         :sha,
+        :token,
         :ip_address
     end
   end

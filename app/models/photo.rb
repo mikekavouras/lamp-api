@@ -5,8 +5,7 @@ class Photo < ApplicationRecord
 
   before_validation :set_token
 
-  def aws_upload_params(options={})
-    expires_at = options[:expires_at] || (Time.now + 48.hour)
+  def aws_upload_params(options={}) expires_at = options[:expires_at] || (Time.now + 48.hour)
     max_file_size = options[:max_file_size] || 1.gigabyte
     acl = options[:acl] || 'public-read'
     starts_with = options[:starts_with] || "#{Rails.env.to_s}/uploads/#{self.token}.jpg"

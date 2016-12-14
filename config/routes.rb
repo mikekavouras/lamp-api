@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
       get '/photos', to: 'photos#index'
       post '/photos', to: 'photos#create'
-      patch '/photos', to: 'photos#update'
+      patch '/photos/:id', to: 'photos#update'
 
       post '/interactions', to: 'interactions#create'
       get '/interactions', to: 'interactions#index'
