@@ -15,7 +15,7 @@ module Api
         @photo.ip_address = request.remote_ip
 
         if photo.save
-          render json: { params: photo.aws_upload_params.merge(id: photo.id) }
+          render json: { params: photo.aws_upload_params, id: photo.id }
         else
           render json: { error: "invalid_photo", errors: photo.errors }
         end
