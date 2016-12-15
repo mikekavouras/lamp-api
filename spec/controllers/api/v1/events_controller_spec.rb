@@ -19,7 +19,7 @@ RSpec.describe Api::V1::EventsController, type: :controller do
         event
         get :index
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][0][:id]).to eq("#{event.id}")
+        expect(json[:events][0][:id]).to eq(event.id)
       end
     end
   end

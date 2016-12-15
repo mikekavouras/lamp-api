@@ -21,7 +21,7 @@ module Api
 
       def index
         render json: {
-          user_devices: user_devices.map { |d| UserDeviceSerializer.new(d) }
+          user_devices: user_devices.map { |user_device| UserDeviceSerializer.new(user_device) }
         }
       end
 

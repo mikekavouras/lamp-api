@@ -5,7 +5,9 @@ module Api
       before_action :require_photo, only: [:update]
 
       def index
-        render json: photos
+        render json: {
+          photos: photos.map { |photo| PhotoSerializer.new(photo) }
+        }
       end
 
       def create
@@ -13,7 +15,7 @@ module Api
         @photo.ip_address = request.remote_ip
 
         if photo.save
-          render json: { data: { id: "#{photo.id}", type: "photos", attributes:  { params: photo.aws_upload_params } } }
+          render json: photo.aws_upload_params.merge(id: photo.id)
         else
           render json: { error: "invalid_photo", errors: photo.errors }
         end

@@ -34,8 +34,8 @@ RSpec.describe Api::V1::InvitesController, type: :controller do
       it "returns an invite" do
         post :create, params: valid_params
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:attributes][:usage_limit]).to eq(1)
-        expect(json[:data][:attributes][:token]).to eq(controller.send(:invite).token)
+        expect(json[:usage_limit]).to eq(1)
+        expect(json[:token]).to eq(controller.send(:invite).token)
       end
 
       it "doesn't create an invite if there is no device" do

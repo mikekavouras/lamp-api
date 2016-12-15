@@ -2,7 +2,9 @@ module Api
   module V1
     class EventsController < ApiController
       def index
-        render json: events
+        render json: {
+          events: events.map { |event| EventSerializer.new(event) }
+        }
       end
 
       private

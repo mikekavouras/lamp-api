@@ -27,7 +27,7 @@ RSpec.describe Api::V1::PhotosController, type: :controller do
         photo
         get :index
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][0][:attributes][:filename]).to eq('iguana.jpg')
+        expect(json[:photos][0][:filename]).to eq('iguana.jpg')
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe Api::V1::PhotosController, type: :controller do
         valid_params[:id] = photo.id
         patch :update, params: valid_params
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:attributes][:filename]).to eq("iguana.jpg")
+        expect(json[:filename]).to eq("iguana.jpg")
       end
     end
   end

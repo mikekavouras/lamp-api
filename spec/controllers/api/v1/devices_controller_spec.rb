@@ -16,8 +16,8 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
         name = "Your Mom's Lamp"
         post :create, params: { particle_id: device.particle_id, name: name }
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:id]).to be_present
-        expect(json[:data][:attributes][:name]).to eq(name)
+        expect(json[:id]).to be_present
+        expect(json[:name]).to eq(name)
         expect(response).to be_ok
       end
 
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
         name = "Your Mom's Lamp"
         post :create, params: { particle_id: device.particle_id, name: name }
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:id]).to eq("#{user_device.id}")
+        expect(json[:id]).to eq(user_device.id)
        end
 
       it "returns an error if it is invalid" do
@@ -45,7 +45,7 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
           user_device
           get :index
           json = JSON.parse(response.body).with_indifferent_access
-          expect(json[:data][0][:id]).to eq("#{user_device.id}")
+          expect(json[:user_devices][0][:id]).to eq(user_device.id)
           expect(response).to be_ok
         end
       end
@@ -54,9 +54,9 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
         it "gets a device" do
           get :show, params: { id: user_device.id }
           json = JSON.parse(response.body).with_indifferent_access
-          expect(json[:data][:id]).to eq("#{user_device.id}")
-          expect(json[:data][:attributes][:name]).to eq(user_device.name)
-          expect(json[:data][:attributes][:device][:particle_id]).to eq(device.particle_id)
+          expect(json[:id]).to eq(user_device.id)
+          expect(json[:name]).to eq(user_device.name)
+          expect(json[:device][:particle_id]).to eq(device.particle_id)
           expect(response).to be_ok
         end
 

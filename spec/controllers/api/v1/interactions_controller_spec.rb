@@ -34,7 +34,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
       it "returns an interaction" do
         post :create, params: valid_params
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:attributes][:name]).to eq("Cute")
+        expect(json[:name]).to eq("Cute")
       end
 
       it "doesn't create an interaction if there is no device" do
@@ -49,7 +49,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
         interaction
         get :index
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][0][:attributes][:name]).to eq("Spooky")
+        expect(json[:interactions][0][:name]).to eq("Spooky")
       end
     end
 
@@ -57,7 +57,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
       it "returns an interaction" do
         get :show, params: { id: interaction.id }
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:attributes][:name]).to eq("Spooky")
+        expect(json[:name]).to eq("Spooky")
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe Api::V1::InteractionsController, type: :controller do
         valid_params[:id] = interaction.id
         patch :update, params: valid_params
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:data][:attributes][:name]).to eq("Cute")
+        expect(json[:name]).to eq("Cute")
       end
     end
 
