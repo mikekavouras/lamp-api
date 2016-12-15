@@ -12,7 +12,7 @@ module Api
       end
 
       def expires_in
-        object.expires_at - Time.now
+        (object.expires_at - Time.now) if object.expires_at
       end
 
       def token_type

@@ -34,7 +34,6 @@ RSpec.describe Api::V1::OauthController, type: :controller do
         expect(json[:access_token]).to be_present
         expect(json[:refresh_token]).to be_present
         expect(json[:token_type]).to eq('bearer')
-        expect(json[:expires_in] > 83000).to be
       end
     end
   end

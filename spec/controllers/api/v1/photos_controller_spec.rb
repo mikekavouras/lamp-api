@@ -43,7 +43,7 @@ RSpec.describe Api::V1::PhotosController, type: :controller do
       it "returns upload params" do
         post :create
         json = JSON.parse(response.body).with_indifferent_access
-        expect(json[:key]).to match('test/uploads')
+        expect(json[:params][:key]).to match('test/uploads')
       end
     end
 
