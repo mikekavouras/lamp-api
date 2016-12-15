@@ -8,5 +8,6 @@ RSpec.describe User, type: :model do
   it { should have_many(:invites) }
   it { should have_many(:interactions) }
   it { should have_many(:events) }
+  it { should have_many(:shares) }
   it { should have_many(:oauth_access_tokens) }
 end

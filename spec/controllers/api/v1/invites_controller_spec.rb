@@ -12,7 +12,7 @@ RSpec.describe Api::V1::InvitesController, type: :controller do
   }}
 
   before(:each) do
-    allow(Rails.application.secrets).to receive(:hashids_salt).and_return("MARK 9:50")
+    allow(Rails.application.secrets).to receive(:invite_hashids_salt).and_return("MARK 9:50")
   end
 
   context "with a current user" do

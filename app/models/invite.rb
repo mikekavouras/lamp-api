@@ -6,7 +6,7 @@ class Invite < ApplicationRecord
 
   def self.find_by_token(token)
     record = begin
-      hashids = Hashids.new(Rails.application.secrets.hashids_salt, 6)
+      hashids = Hashids.new(Rails.application.secrets.invite_hashids_salt, 6)
       id = hashids.decode(token)[0]
       return self.active.where(id: id).first if id
     rescue Hashids::InputError
@@ -15,7 +15,7 @@ class Invite < ApplicationRecord
   end
 
   def token
-    hashids = Hashids.new(Rails.application.secrets.hashids_salt, 6)
+    hashids = Hashids.new(Rails.application.secrets.invite_hashids_salt, 6)
     hashids.encode(self.id)
   end
 

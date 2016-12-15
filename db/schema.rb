@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211101750) do
+ActiveRecord::Schema.define(version: 20161215074422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,23 @@ ActiveRecord::Schema.define(version: 20161211101750) do
     t.string   "ip_address"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "shares", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "interaction_id"
+    t.integer  "usage_limit"
+    t.integer  "usage_count",    default: 0
+    t.datetime "expires_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["created_at"], name: "index_shares_on_created_at", using: :btree
+    t.index ["expires_at"], name: "index_shares_on_expires_at", using: :btree
+    t.index ["interaction_id"], name: "index_shares_on_interaction_id", using: :btree
+    t.index ["updated_at"], name: "index_shares_on_updated_at", using: :btree
+    t.index ["usage_count"], name: "index_shares_on_usage_count", using: :btree
+    t.index ["usage_limit"], name: "index_shares_on_usage_limit", using: :btree
+    t.index ["user_id"], name: "index_shares_on_user_id", using: :btree
   end
 
   create_table "user_devices", force: :cascade do |t|

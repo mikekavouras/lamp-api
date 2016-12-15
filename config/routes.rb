@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   get '/ping', to: 'pages#ping'
+
   post '/glow', to: 'pages#glow'
+
+  get '/shares/:token', to: 'shares#show'
+  post '/shares/:token', to: 'shares#create'
 
   scope path: '/api', module: 'api' do
     scope path: '/v1', module: 'v1' do
@@ -37,6 +41,9 @@ Rails.application.routes.draw do
       patch '/interactions/:id', to: 'interactions#update'
       delete '/interactions/:id', to: 'interactions#destroy'
       post '/interactions/:id', to: 'interactions#event'
+
+      post '/shares', to: 'shares#create'
+      delete '/shares/:id', to: 'shares#destroy'
 
       get '/events', to: 'events#index'
     end

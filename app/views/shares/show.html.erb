@@ -1,0 +1,74 @@
+<!doctype html>
+<!--[if IE 8]>         <html lang="en" class="ie ie8 lt-ie9" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 9]>         <html lang="en" class="ie ie9" prefix="og: http://ogp.me/ns#">        <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" prefix="og: http://ogp.me/ns#">                       <!--<![endif]-->
+  <head>
+    <title><%= share.interaction.name %></title>
+    <link href="/css/share.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,300,400italic,700italic" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <% if share.interaction.photo %>
+    <meta property="og:image" content="<%= share.interaction.photo.url %>" />
+    <meta property="og:image:secure_url" content="<%= share.interaction.photo.url %>" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="<%= share.interaction.photo.original_width %>" />
+    <meta property="og:image:height" content="<%= share.interaction.photo.original_height %>" />
+    <meta property="og:url" content="<%= share.url %>">
+    <meta property="og:site_name" content="<%= site_name %>">
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:site" content="@electrolamp" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="<%= share.interaction.photo.url %>" />
+    <meta name="twitter:image:width" content="<%= share.interaction.photo.original_width %>" />
+    <meta name="twitter:image:height" content="<%= share.interaction.photo.original_height %>" />
+    <meta name="twitter:url" content="<%= share.url %>" />
+    <% end %>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,800italic,300,400,600,700,800">
+    <style type="text/css">
+    html {
+      height: 100%;
+    }
+    body {
+      background-image:  url('<%= share.interaction.photo.url %>');
+      background-size:  cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 100%;
+    }
+    #content, #share {
+      width: 100%;
+      height: 100%;
+    }
+    form {
+      width: 100%;
+      height: 100%;
+    }
+    button {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+    button:hover {
+      cursor: pointer;
+    }
+    </style>
+  </head>
+  <body class="">
+    <div id="content">
+      <div id="share">
+        <form method="post" action="">
+          <% if share.interaction.photo %>
+            <button></button>
+          <% end %>
+        </form>
+      </div>
+    </div>
+    <div id="lightbox-background"></div>
+  </body>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+</html>

@@ -9,7 +9,7 @@ RSpec.describe Invite, type: :model do
 
   context "salt is good" do
     before(:each) do
-      expect(Rails.application.secrets).to receive(:hashids_salt).and_return("MARK 9:50")
+      expect(Rails.application.secrets).to receive(:invite_hashids_salt).and_return("MARK 9:50")
     end
 
     it "calculates a token" do
@@ -17,7 +17,7 @@ RSpec.describe Invite, type: :model do
       expect(invite.token).to eq("8ONGdp")
     end
 
-    it "finds a listing by hash" do
+    it "finds a record by hash" do
       fake_scope = double
       fake_where = double
       expect(fake_scope).to receive(:where).with({id: 1}).and_return(fake_where)
@@ -26,7 +26,7 @@ RSpec.describe Invite, type: :model do
       Invite.find_by_token("8ONGdp")
     end
 
-    it "returns nil when trying to find a listing by an invalid hash" do
+    it "returns nil when trying to find a record by an invalid hash" do
       result = Invite.find_by_token('')
       expect(result).to be(nil)
     end

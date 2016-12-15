@@ -1,0 +1,70 @@
+<!doctype html>
+<!--[if IE 8]>         <html lang="en" class="ie ie8 lt-ie9" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 9]>         <html lang="en" class="ie ie9" prefix="og: http://ogp.me/ns#">        <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" prefix="og: http://ogp.me/ns#">                       <!--<![endif]-->
+  {{#share}}
+  <head>
+    <title><%= interaction.name %></title>
+    <link href="/css/share.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,300,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/fonts/theano-didot/stylesheet.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <link href="/fonts/pacifico/stylesheet.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta property="og:image" content="https://rpl.cat/uploads/{{token}}/public.png" />
+    <meta property="og:image:secure_url" content="https://rpl.cat/uploads/{{token}}/public.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="{{scaled_width}}" />
+    <meta property="og:image:height" content="{{scaled_height}}" />
+    <meta property="og:url" content="https://rpl.cat/{{token}}">
+    <meta property="og:site_name" content="rpl.cat">
+    <meta name="twitter:card" content="photo" />
+    <meta name="twitter:site" content="@rplcat" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="https://rpl.cat/uploads/{{token}}/public.png" />
+    <meta name="twitter:image:width" content="{{scaled_width}}" />
+    <meta name="twitter:image:height" content="{{scaled_height}}" />
+    <meta name="twitter:url" content="https://rpl.cat/{{token}}" />
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,800italic,300,400,600,700,800">
+  </head>
+  <body class="">
+    <div id="header">
+      <h1>
+        <a href="/"><span class="logo"><img src="/images/rplcat.png"></span><span>rpl.cat</span></a>
+        <ul class="navigation">
+          <li class="company">
+            <a href="/about">Heyooo!</a>
+            <a href="/contact">Contact</a>
+            <a href="/help">Help &#38; Support</a>
+          </li>
+        </ul>
+      </h1>
+    </div>
+    <div id="caption">
+    </div>
+    <div id="content">
+      <div id="share">
+        <img src="/uploads/{{token}}/public.png" width="{{scaled_width}}" height="{{scaled_height}}">
+      </div>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright &#169; 2015, rpl.cat. All rights reserved.</span>
+          <span class="policies">
+          <a href="/privacy">Privacy Policy</a> |
+          <a href="/terms">Terms of Service</a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div id="lightbox-background"></div>
+  </body>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <script src="/js/share.js"
+  {{/share}}
+</html>

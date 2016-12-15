@@ -5,6 +5,10 @@ class Photo < ApplicationRecord
 
   before_validation :set_token
 
+  def url
+    "https://#{Rails.application.secrets.aws_bucket}.s3.amazonaws.com/#{Rails.env.to_s}/uploads/#{self.token}.jpg"
+  end
+
   def aws_upload_params(options={}) expires_at = options[:expires_at] || (Time.now + 48.hour)
     max_file_size = options[:max_file_size] || 1.gigabyte
     acl = options[:acl] || 'public-read'

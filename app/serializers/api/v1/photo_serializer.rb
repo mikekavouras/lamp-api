@@ -10,7 +10,8 @@ module Api
         :original_height,
         :sha,
         :token,
-        :ip_address
+        :ip_address,
+        :url
     end
   end
 end
