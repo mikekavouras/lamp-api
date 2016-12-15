@@ -19,7 +19,9 @@ module Api
       end
 
       def index
-        render json: interactions
+        render json: {
+          interactions: interactions.map { |i| InteractionSerializer.new(i) }
+        }
       end
 
       def show
