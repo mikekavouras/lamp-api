@@ -7,9 +7,11 @@ class Device < ApplicationRecord
   validates :particle_id, presence: true, uniqueness: true
 
   def glow(color)
-    return false unless COLORS.include?(color)
-
-    particle_device.function('glow', color)
+    if COLORS.include?(color)
+      particle_device.function('glow', color)
+    else
+      particle_device.function('rgb', color)
+    end
   end
 
   def particle_device
