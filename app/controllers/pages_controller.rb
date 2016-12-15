@@ -1,10 +1,12 @@
 class PagesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def ping
     render plain: "pong"
   end
 
-  def purple
-    GlowWorker.perform_async(Device.first.id, 'purple')
+  def glow
+    GlowWorker.perform_async(Device.first.id, params[:color])
 
     render plain: "glow"
   end

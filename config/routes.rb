@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   get '/ping', to: 'pages#ping'
-  get '/purple', to: 'pages#purple'
+  post '/glow', to: 'pages#glow'
 
   scope path: '/api', module: 'api' do
     scope path: '/v1', module: 'v1' do

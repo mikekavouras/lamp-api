@@ -1,5 +1,5 @@
 class Device < ApplicationRecord
-  COLORS = ['red', 'blue', 'purple'].freeze
+  COLORS = ['red', 'green', 'blue', 'purple'].freeze
 
   has_many :user_devices
   has_many :users, through: :user_devices

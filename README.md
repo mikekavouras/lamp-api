@@ -90,3 +90,5 @@ Set the access token; also, set the particle id while you are there.
 
 
 Now you should be able to run the `GET #purple` test action and also create Device.
+
+## Changing the particle code
