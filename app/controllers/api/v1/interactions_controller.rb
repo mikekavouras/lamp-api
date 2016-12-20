@@ -20,7 +20,7 @@ module Api
 
       def index
         render json: {
-          interactions: interactions.map { |i| InteractionSerializer.new(i) }
+          interactions: interactions.order('created_at ASC').map { |i| InteractionSerializer.new(i) }
         }
       end
 
