@@ -51,7 +51,7 @@ module Api
       end
 
       def user_device_id
-        "#{params[:id]}"
+        "#{params[:device_id]}"
       end
 
       def user_device
