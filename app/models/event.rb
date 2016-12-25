@@ -14,7 +14,7 @@ class Event < ApplicationRecord
         'purple'
       elsif interaction.red == 255 && interaction.blue == 16
         'magenta'
-      elsif interaction.green == 255 && interaction.blue == 255
+      elsif interaction.green == 128 && interaction.blue == 255
         'cyan'
       elsif interaction.red > 0
         'red'
