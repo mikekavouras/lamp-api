@@ -10,7 +10,13 @@ class Event < ApplicationRecord
   # TODO, should this move into the interaction?, the worker?
   def perform
     begin
-      color = if interaction.red > 0
+      color = if interaction.red == 255 && interaction.blue == 128
+        'purple'
+      elsif interaction.red == 255 && interaction.blue == 16
+        'magenta'
+      elsif interaction.green == 255 && interaction.blue == 255
+        'cyan'
+      elsif interaction.red > 0
         'red'
       elsif interaction.green > 0
         'green'
