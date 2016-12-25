@@ -12,6 +12,8 @@ class Event < ApplicationRecord
     begin
       color = "%02x%02x%02x" % [interaction.red, interaction.blue, interaction.green]
 
+      color = "FFFF00"
+
       if device_response = device.rgb(color)
         self.response = device_response.to_json
         self.status = "success"
