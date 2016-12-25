@@ -10,17 +10,9 @@ class Event < ApplicationRecord
   # TODO, should this move into the interaction?, the worker?
   def perform
     begin
-      color = if interaction.red > 0
-        'red'
-      elsif interaction.green > 0
-        'green'
-      elsif interaction.blue > 0
-        'blue'
-      end
+      color = "%02x%02x%02x" % [interaction.red, interaction.blue, interaction.green]
 
-      color ||= 'purple'
-
-      if device_response = device.glow(color)
+      if device_response = device.rgb(color)
         self.response = device_response.to_json
         self.status = "success"
       else
