@@ -10,7 +10,7 @@ class Event < ApplicationRecord
   # TODO, should this move into the interaction?, the worker?
   def perform
     begin
-      color = "%02x%02x%02x" % [interaction.red, interaction.blue, interaction.green].upcase
+      color = ("%02x%02x%02x" % [interaction.red, interaction.blue, interaction.green]).upcase
 
       if device_response = device.glow(color)
         self.response = device_response.to_json
