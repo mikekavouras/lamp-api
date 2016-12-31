@@ -40,7 +40,7 @@ $ particle list
   Variables:
     version (string)
   Functions:
-    int glow(String args) 
+    int glow(String args)
     int blink(String args)
 ```
 
@@ -92,3 +92,5 @@ Set the access token; also, set the particle id while you are there.
 Now you should be able to run the `GET #purple` test action and also create Device.
 
 ## Changing the particle code
+
+mike says beep
