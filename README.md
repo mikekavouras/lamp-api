@@ -1,4 +1,4 @@
-# Lamps
+# Lamp
 
 A description of your application.
 
