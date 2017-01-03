@@ -1,4 +1,4 @@
-# Lamp
+# Lamp - Awesome
 
 A description of your application.
 
