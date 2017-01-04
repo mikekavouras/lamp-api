@@ -83,3 +83,4 @@ production:
   database: lamp-api_production
   username: lamp-api
   password: <%= ENV['LAMP-API_DATABASE_PASSWORD'] %>
+  pool: 10
