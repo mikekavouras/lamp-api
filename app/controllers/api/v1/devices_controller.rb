@@ -25,6 +25,10 @@ module Api
         }
       end
 
+      def update
+        user_device.update_attributes(device_params)
+      end
+
       def show
         render json: user_device
       end
@@ -42,6 +46,10 @@ module Api
       end
 
       private
+
+      def device_params
+        params.permit(:particle_id, :name)
+      end
 
       def particle_id
         "#{params[:particle_id]}"
