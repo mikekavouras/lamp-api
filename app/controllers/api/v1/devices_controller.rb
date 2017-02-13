@@ -27,6 +27,7 @@ module Api
 
       def update
         user_device.update_attributes(device_params)
+        render json: user_device
       end
 
       def show
