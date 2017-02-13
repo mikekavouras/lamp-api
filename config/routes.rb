@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       get '/devices', to: 'devices#index'
       get '/devices/:id', to: 'devices#show'
       post '/devices', to: 'devices#create'
-      patch '/devices', to: 'devices#update'
+      patch '/devices/:id', to: 'devices#update'
       delete '/devices/:id', to: 'devices#destroy'
       post '/devices/:id/reset', to: 'devices#reset'
 
