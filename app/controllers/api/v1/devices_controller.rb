@@ -53,7 +53,7 @@ module Api
       end
 
       def particle_id
-        "#{params[:particle_id]}"
+        "#{params[:particle_id]}".downcase
       end
 
       def device
