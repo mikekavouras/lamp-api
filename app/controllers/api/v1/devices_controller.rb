@@ -48,8 +48,11 @@ module Api
       end
 
       def presence
-        device.update_attribute(:presence, params[:presence])
-        head :ok
+        if params[:presence] && ["true", "false"].include?(params[:presence])
+          presence = params[:presence] == "true" ? true : false
+          device.update_attribute(:presence, presence)
+          head :ok
+        end
       end
 
       private
@@ -59,11 +62,20 @@ module Api
       end
 
       def particle_id
-        "#{params[:particle_id]}".downcase
+        params[:particle_id]
+      end
+
+      # coreid is sent from particle webhooks
+      def coreid
+        params[:coreid]
+      end
+
+      def device_id
+        "#{(particle_id || coreid)}".downcase
       end
 
       def device
-        @device ||= Device.where(particle_id: particle_id).first
+        @device ||= Device.where(particle_id: device_id).first
       end
 
       def user_device_id
