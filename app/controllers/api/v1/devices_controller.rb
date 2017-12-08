@@ -88,7 +88,7 @@ module Api
 
       def require_user_device
         render json: { error: "device_not_found" }, status: 404 unless user_device.present?
-     end
+      end
     end
   end
 end
