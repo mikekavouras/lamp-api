@@ -2,17 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::InteractionsController, type: :controller do
   let(:user) { create(:user, anonymous: true) }
+  let(:photo) { create(:photo, user: user) }
   let(:device) { create(:device) }
   let(:user_device) { create(:user_device, user: user, device: device) }
-  let(:interaction) { create(:interaction, user: user, user_device: user_device) }
+  let(:interaction) { create(:interaction, user: user, user_device: user_device, photo: photo) }
   let(:valid_params) {{
     user_device_id: user_device.id,
     name: "Cute",
+
     description: "I glow this to say sup",
     red: 100,
     green: 0,
     blue: 0,
     pattern: 'glow',
+    photo_id: photo.id
   }}
 
   context "with a current user" do

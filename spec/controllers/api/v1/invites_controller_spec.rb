@@ -6,9 +6,9 @@ RSpec.describe Api::V1::InvitesController, type: :controller do
   let(:user_device) { create(:user_device, user: user, device: device) }
   let(:invite) { create(:invite, user: user, device: device) }
   let(:valid_params) {{
+    device_id: user_device.id,
     usage_limit: 1,
-    expires_at: 1.day.from_now,
-    id: user_device.id
+    expires_at: 1.day.from_now
   }}
 
   before(:each) do
