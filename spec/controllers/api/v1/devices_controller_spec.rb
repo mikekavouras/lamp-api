@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::DevicesController, type: :controller do
   let(:user) { create(:user, anonymous: true) }
-  let!(:device) { create(:device) }
+  let(:device) { create(:device) }
 
   context "with a current user" do
     before(:each) do
