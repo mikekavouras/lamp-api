@@ -54,6 +54,7 @@ group :test do
   # Make our specs watchable with beautiful progress bar
   gem 'guard-rspec', require: false
   gem 'fuubar'
+  gem 'pry'
 end
 
 group :test, :development do
