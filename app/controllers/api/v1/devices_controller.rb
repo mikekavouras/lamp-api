@@ -7,6 +7,7 @@ module Api
 
       def create
         # TODO is this the right behavior to overwrite the name and direct?
+
         @user_device = current_user.user_devices.where(device: device).first
         @user_device ||= current_user.user_devices.new(device: device)
         @user_device.name = params[:name]

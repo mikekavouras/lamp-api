@@ -31,7 +31,7 @@ RSpec.describe Api::V1::SharesController, type: :controller do
         expect(response).to be_ok
       end
 
-      it "returns a share" do
+      fit "returns a share" do
         post :create, params: valid_params
         json = JSON.parse(response.body).with_indifferent_access
         expect(json[:interaction][:name]).to eq(interaction.name)

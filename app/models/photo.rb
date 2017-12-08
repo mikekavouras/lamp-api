@@ -36,7 +36,7 @@ class Photo < ApplicationRecord
                     OpenSSL::Digest.new('SHA1'),
                     Rails.application.secrets.aws_secret_access_key, policy)).gsub("\n","")
 
-    return {
+    {
       "key" => "#{starts_with}",
       "hash" => "#{self.token}",
       "utf8" => "",

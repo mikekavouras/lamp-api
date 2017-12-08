@@ -6,6 +6,8 @@ class Device < ApplicationRecord
 
   validates :particle_id, presence: true, uniqueness: true
 
+  before_save :downcase_particle_id
+
   def glow(color)
     if COLORS.include?(color)
       particle_device.function('glow', color)
@@ -33,5 +35,9 @@ class Device < ApplicationRecord
 
   def parsed_params
     @parsed_params ||= JSON.parse(params).with_indifferent_access rescue {}
+  end
+
+  def downcase_particle_id
+    self.particle_id = particle_id.downcase
   end
 end
