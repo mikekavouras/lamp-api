@@ -48,13 +48,13 @@ group :development, :test do
   gem 'annotate'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'pry'
 end
 
 group :test do
   # Make our specs watchable with beautiful progress bar
   gem 'guard-rspec', require: false
   gem 'fuubar'
-  gem 'pry'
 end
 
 group :test, :development do
