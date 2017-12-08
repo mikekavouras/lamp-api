@@ -37,6 +37,15 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
       end
     end
 
+    describe "POST #presence" do
+      fit "updates the device presence value" do
+        expect(device.presence).to be(false)
+        post :presence, params: { particle_id: device.particle_id, presence: true }
+        expect(device.reload.presence).to be(true)
+        expect(response.code).to eq("200")
+      end
+    end
+
     context "with an existing user_device" do
       let!(:user_device) { create(:user_device, user: user, device: device) }
 

@@ -1,12 +1,13 @@
 module Api
   module V1
     class DevicesController < ApiController
-      before_action :require_device, only: [:create]
+      before_action :require_device, only: [:create, :presence]
       before_action :require_user_device_id, only: [:show, :delete, :reset]
       before_action :require_user_device, only: [:show, :delete, :reset]
 
       def create
         # TODO is this the right behavior to overwrite the name and direct?
+
         @user_device = current_user.user_devices.where(device: device).first
         @user_device ||= current_user.user_devices.new(device: device)
         @user_device.name = params[:name]
@@ -46,6 +47,11 @@ module Api
         head :ok
       end
 
+      def presence
+        device.update_attribute(:presence, params[:presence])
+        head :ok
+      end
+
       private
 
       def device_params
@@ -53,7 +59,7 @@ module Api
       end
 
       def particle_id
-        "#{params[:particle_id]}"
+        "#{params[:particle_id]}".downcase
       end
 
       def device
@@ -82,7 +88,7 @@ module Api
 
       def require_user_device
         render json: { error: "device_not_found" }, status: 404 unless user_device.present?
-      end
+     end
     end
   end
 end

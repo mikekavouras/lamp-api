@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       patch '/devices/:id', to: 'devices#update'
       delete '/devices/:id', to: 'devices#destroy'
       post '/devices/:id/reset', to: 'devices#reset'
+      post '/devices/presence', to: 'devices#presence'
 
       post '/invites', to: 'invites#create'
       post '/invites/accept', to: 'invites#accept'

@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::SharesController, type: :controller do
+  let(:photo) { create(:photo, user: user) }
   let(:user) { create(:user, anonymous: true) }
   let(:device) { create(:device) }
   let(:user_device) { create(:user_device, user: user, device: device) }
-  let(:interaction) { create(:interaction, user: user, user_device: user_device) }
+  let(:interaction) { create(:interaction, user: user, user_device: user_device, photo: photo) }
   let(:share) { create(:share, interaction: interaction, user: user) }
 
   let(:valid_params) {{
