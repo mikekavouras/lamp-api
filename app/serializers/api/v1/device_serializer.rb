@@ -4,7 +4,8 @@ module Api
       attributes \
         :particle_id,
         :name,
-        :params
+        :params,
+        :presence
 
       private
 
