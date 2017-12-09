@@ -22,7 +22,7 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
       end
 
       it "returns an existing user device if one already exists" do
-        user_device =create(:user_device, user: user, device: device)
+        user_device = create(:user_device, user: user, device: device)
         name = "Your Mom's Lamp"
         post :create, params: { particle_id: device.particle_id, name: name }
         json = JSON.parse(response.body).with_indifferent_access
@@ -38,10 +38,18 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
     end
 
     describe "POST #presence" do
-      fit "updates the device presence value" do
-        expect(device.presence).to be(false)
+      it "updates the device last_heard_at when true" do
+        expect(device.last_heard_at).to be_nil
         post :presence, params: { particle_id: device.particle_id, presence: true }
-        expect(device.reload.presence).to be(true)
+        device.reload
+        expect(device.last_heard_at).not_to be_nil
+        expect(response.code).to eq("200")
+      end
+
+      it "doesn't update last_heard_at when false" do
+        post :presence, params: { particle_id: device.particle_id, presence: false }
+        device.reload
+        expect(device.last_heard_at).to be_nil
         expect(response.code).to eq("200")
       end
     end
