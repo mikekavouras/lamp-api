@@ -65,6 +65,7 @@ module Api
         puts "*" * 80
         puts params[:particle_id]
         puts "*" * 80
+        params[:particle_id]
       end
 
       # coreid is sent from particle webhooks
