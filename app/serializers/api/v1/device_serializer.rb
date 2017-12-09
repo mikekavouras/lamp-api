@@ -5,7 +5,6 @@ module Api
         :particle_id,
         :name,
         :params,
-        :presence,
         :last_heard_at
 
       private
