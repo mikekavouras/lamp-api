@@ -38,10 +38,20 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
     end
 
     describe "POST #presence" do
-      fit "updates the device presence value" do
+      it "updates the device presence value" do
         expect(device.presence).to be(false)
         post :presence, params: { particle_id: device.particle_id, presence: true }
-        expect(device.reload.presence).to be(true)
+        device.reload
+        expect(device.presence).to be(true)
+        expect(device.last_heard_at).not_to be_nil
+        expect(response.code).to eq("200")
+      end
+
+      it "doesn't update last_heard at when false" do
+        post :presence, params: { particle_id: device.particle_id, presence: false }
+        device.reload
+        expect(device.presence).to be(false)
+        expect(device.last_heard_at).to be_nil
         expect(response.code).to eq("200")
       end
     end

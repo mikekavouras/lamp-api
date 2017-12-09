@@ -50,7 +50,11 @@ module Api
       def presence
         if params[:presence] && ["true", "false"].include?(params[:presence])
           presence = params[:presence] == "true" ? true : false
-          device.update_attribute(:presence, presence)
+          if presence
+            device.update_attributes(presence: presence, last_heard_at: Time.now)
+          else
+            device.update_attribute(:presence, presence)
+          end
           head :ok
         end
       end
